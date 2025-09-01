@@ -26,6 +26,7 @@ function Login() {
 
       // ✅ Save to localStorage
       localStorage.setItem("username", username);
+      localStorage.setItem("username", username);
       localStorage.setItem("role", role);
 
       // ✅ Navigate based on role

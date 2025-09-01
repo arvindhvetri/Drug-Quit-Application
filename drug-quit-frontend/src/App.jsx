@@ -8,6 +8,7 @@ import UserPortal from "./components/user/UserPortal";
 import BlogPage from "./components/user/pages/BlogPage";
 import UserDailyTasks from "./components/user/pages/UserDailyTasks";
 import UserPage3 from "./components/user/pages/Page3";
+import ChatInterface from "./components/user/pages/ChatInterface";
 
 import AdminPortal from "./components/admin/AdminPortal";
 import BlogManagement from "./components/admin/pages/BlogManagement";
@@ -31,6 +32,7 @@ function App() {
           <Route path="blogs" element={<BlogPage />} />
           <Route path="UserDailyTasks" element={<UserDailyTasks />} />
           <Route path="page3" element={<UserPage3 />} />
+          <Route path="chat" element={<ChatInterface />} />
         </Route>
 
         {/* Admin Portal */}

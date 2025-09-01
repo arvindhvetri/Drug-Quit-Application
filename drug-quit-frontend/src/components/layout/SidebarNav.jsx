@@ -31,6 +31,9 @@ function SidebarNav() {
         <Link to={`${basePath}/page3`} className="sidebar-link">
           💬 Page 3
         </Link>
+        <Link to={`${basePath}/chat`} className="sidebar-link">
+        💬 Chat
+        </Link>
         <Link to="/profile" className="sidebar-link">
           👤 Profile
         </Link>

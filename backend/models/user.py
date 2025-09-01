@@ -12,10 +12,21 @@ class User:
 
     @staticmethod
     def create_user(email, username, password, role='user'):
-        users_collection.insert_one({
+        user = {
             "email": email,
             "username": username,
-            "password": password,  # ✅ Already hashed
-            "role": role
-        })
-        return True
+            "password": password,
+            "role": role,
+        }
+        result = users_collection.insert_one(user)
+
+        # Get Mongo's generated _id
+        mongo_id = result.inserted_id
+
+        # Update the document to also store it as "user_id"
+        users_collection.update_one(
+            {"_id": mongo_id},
+            {"$set": {"user_id": str(mongo_id)}}
+        )
+
+        return mongo_id
