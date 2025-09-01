@@ -146,6 +146,19 @@
   }
 }
 
+/* === Loading & Error States === */
+.loading,
+.error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+  color: #64748b;
+}
+
+.error {
+  color: #ef4444;
+}
+
 /* Tablet: Cards shrink but still fill */
 @media (max-width: 768px) {
   .main-content {

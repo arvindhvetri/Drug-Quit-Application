@@ -1,70 +1,55 @@
 // src/components/user/pages/BlogPage.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '@styles/BlogPage.css';
 import SidebarLayout from '../../layout/SidebarLayout';
 
-const blogs = [
-  {
-    id: 1,
-    title: "My First Week Sober",
-    excerpt: "The first seven days were the hardest. I cried, I doubted, but I didn’t give up.",
-    author: "Alex M.",
-    date: "May 10, 2025",
-    readTime: "5 min read",
-  },
-  {
-    id: 2,
-    title: "How I Found My Tribe",
-    excerpt: "I felt alone until I joined a support group. Now I have friends who truly get it.",
-    author: "Jamie L.",
-    date: "May 8, 2025",
-    readTime: "6 min read",
-  },
-  {
-    id: 3,
-    title: "Running Saved Me",
-    excerpt: "Every morning, I run. It clears my mind and reminds me I’m strong.",
-    author: "Sam T.",
-    date: "May 6, 2025",
-    readTime: "4 min read",
-  },
-  {
-    id: 4,
-    title: "Relapse Is Not Failure",
-    excerpt: "I slipped. I felt shame. But I learned — recovery isn’t a straight line.",
-    author: "Riley K.",
-    date: "May 5, 2025",
-    readTime: "7 min read",
-  },
-  {
-    id: 5,
-    title: "Meditation & Mindfulness",
-    excerpt: "Five minutes a day changed how I handle stress and cravings.",
-    author: "Casey J.",
-    date: "May 3, 2025",
-    readTime: "5 min read",
-  },
-  {
-    id: 6,
-    title: "Cooking My Way to Clarity",
-    excerpt: "Focusing on recipes helped me redirect urges into creativity.",
-    author: "Morgan P.",
-    date: "May 1, 2025",
-    readTime: "4 min read",
-  },
-  {
-    id: 7,
-    title: "Letters to My Future Self",
-    excerpt: "Writing letters keeps me connected to why I started this journey.",
-    author: "Jordan L.",
-    date: "Apr 28, 2025",
-    readTime: "6 min read",
-  },
-];
-
 function BlogPage() {
-  const topRow = blogs.slice(0, 4);
-  const bottomRow = blogs.slice(4, 7);
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch blogs from backend
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await fetch('/api/user/blogs'); // Your Flask route
+        if (!res.ok) throw new Error('Failed to fetch blogs');
+        const data = await res.json();
+        // Only show first 5
+        setBlogs(data.slice(0, 5));
+      } catch (err) {
+        console.error('Fetch error:', err);
+        setError('Could not load stories. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  const topRow = blogs.slice(0, 3);
+  const bottomRow = blogs.slice(3, 5);
+
+  if (loading) {
+    return (
+      <SidebarLayout>
+        <div className="blog-page-container">
+          <div className="loading">Loading stories...</div>
+        </div>
+      </SidebarLayout>
+    );
+  }
+
+  if (error) {
+    return (
+      <SidebarLayout>
+        <div className="blog-page-container">
+          <div className="error">{error}</div>
+        </div>
+      </SidebarLayout>
+    );
+  }
 
   return (
     <SidebarLayout>
@@ -75,10 +60,10 @@ function BlogPage() {
           <p>Real journeys from people who’ve walked the path — one day at a time.</p>
         </header>
 
-        {/* === Top Row: 4 Cards === */}
+        {/* === Top Row: 3 Cards === */}
         <div className="blog-row top">
           {topRow.map((blog) => (
-            <div key={blog.id} className="blog-card">
+            <div key={blog._id} className="blog-card">
               <h3>{blog.title}</h3>
               <p className="blog-excerpt">{blog.excerpt}</p>
               <div className="blog-meta">
@@ -86,14 +71,21 @@ function BlogPage() {
                 <span className="blog-date">{blog.date}</span>
                 <span className="blog-readtime">{blog.readTime}</span>
               </div>
+              {blog.link && (
+                <div className="blog-link">
+                  <a href={blog.link} target="_blank" rel="noopener noreferrer">
+                    🔗 Resource
+                  </a>
+                </div>
+              )}
             </div>
           ))}
         </div>
 
-        {/* === Bottom Row: 3 Cards === */}
+        {/* === Bottom Row: 2 Cards === */}
         <div className="blog-row bottom">
           {bottomRow.map((blog) => (
-            <div key={blog.id} className="blog-card">
+            <div key={blog._id} className="blog-card">
               <h3>{blog.title}</h3>
               <p className="blog-excerpt">{blog.excerpt}</p>
               <div className="blog-meta">
@@ -101,6 +93,13 @@ function BlogPage() {
                 <span className="blog-date">{blog.date}</span>
                 <span className="blog-readtime">{blog.readTime}</span>
               </div>
+              {blog.link && (
+                <div className="blog-link">
+                  <a href={blog.link} target="_blank" rel="noopener noreferrer">
+                    🔗 Resource
+                  </a>
+                </div>
+              )}
             </div>
           ))}
         </div>

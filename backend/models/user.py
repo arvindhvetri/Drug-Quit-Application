@@ -1,5 +1,4 @@
 # backend/models/user.py
-from werkzeug.security import generate_password_hash, check_password_hash
 from utils.db import users_collection
 
 class User:
@@ -13,11 +12,10 @@ class User:
 
     @staticmethod
     def create_user(email, username, password, role='user'):
-        hashed = generate_password_hash(password)  # Uses scrypt by default
         users_collection.insert_one({
             "email": email,
             "username": username,
-            "password": hashed,
+            "password": password,  # ✅ Already hashed
             "role": role
         })
         return True

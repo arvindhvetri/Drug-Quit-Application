@@ -37,7 +37,7 @@ function SidebarNav() {
       </nav>
 
       <div className="sidebar-footer">
-        <Link to="/logout" className="btn btn-primary">Logout</Link>
+        <Link to="/login" className="btn btn-primary">Logout</Link>
       </div>
     </div>
   );

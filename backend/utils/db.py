@@ -2,7 +2,7 @@
 from pymongo import MongoClient
 
 # Connect to MongoDB
-client = MongoClient("mongodb+srv://<user_name>:<pass>@quitdrugsdb.s8v80vq.mongodb.net/")
+client = MongoClient("mongodb://localhost:27017/")
 db = client['drug_quit_app']
 
 # Collections
