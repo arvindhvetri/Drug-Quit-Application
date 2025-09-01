@@ -1,0 +1,89 @@
+/* src/components/user/pages/UserDailyTasks.css */
+.UserDailyTasks-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.UserDailyTasks-header {
+  text-align: center;
+}
+
+.UserDailyTasks-header h1 {
+  font-size: 2.2rem;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.UserDailyTasks-header p {
+  color: #64748b;
+}
+
+.input-section textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  resize: none;
+}
+
+.error-text {
+  color: #ef4444;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.detected-issues {
+  background: #f1f5f9;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.task-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px -10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.task-card h3 {
+  margin-top: 0;
+  color: #1e293b;
+}
+
+.photo-upload {
+  margin-top: 1rem;
+}
+
+.photo-preview img {
+  max-width: 100%;
+  border-radius: 12px;
+  margin-top: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.verification-result {
+  padding: 1.2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.verification-result.success {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #34d399;
+}
+
+.verification-result.fail {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #f87171;
+}

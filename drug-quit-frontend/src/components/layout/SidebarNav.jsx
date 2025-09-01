@@ -25,8 +25,8 @@ function SidebarNav() {
         <Link to={`${basePath}/blogs`} className="sidebar-link" end>
           📰 Blogs
         </Link>
-        <Link to={`${basePath}/page2`} className="sidebar-link">
-          🎯 Page 2
+        <Link to={`${basePath}/UserDailyTasks`} className="sidebar-link">
+          🎯 Users Daily Tasks
         </Link>
         <Link to={`${basePath}/page3`} className="sidebar-link">
           💬 Page 3

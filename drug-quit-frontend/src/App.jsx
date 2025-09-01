@@ -6,7 +6,7 @@ import Signup from "./components/auth/Signup";
 
 import UserPortal from "./components/user/UserPortal";
 import BlogPage from "./components/user/pages/BlogPage";
-import UserPage2 from "./components/user/pages/Page2";
+import UserDailyTasks from "./components/user/pages/UserDailyTasks";
 import UserPage3 from "./components/user/pages/Page3";
 
 import AdminPortal from "./components/admin/AdminPortal";
@@ -29,7 +29,7 @@ function App() {
         {/* User Portal */}
         <Route path="/user/*" element={<UserPortal />}>
           <Route path="blogs" element={<BlogPage />} />
-          <Route path="page2" element={<UserPage2 />} />
+          <Route path="UserDailyTasks" element={<UserDailyTasks />} />
           <Route path="page3" element={<UserPage3 />} />
         </Route>
 

@@ -3,6 +3,7 @@ from flask import Flask
 from flask_cors import CORS
 from routes.auth import auth_bp
 from routes.blogs import blogs_bp
+from routes.tasks import tasks_bp
 
 def create_app():
     app = Flask(__name__)
@@ -10,6 +11,7 @@ def create_app():
 
     app.register_blueprint(auth_bp, url_prefix='/')
     app.register_blueprint(blogs_bp, url_prefix='/')
+    app.register_blueprint(tasks_bp, url_prefix='/')
 
     return app
 

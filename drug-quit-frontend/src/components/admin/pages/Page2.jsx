@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../styles/Page2.css';
+import '../../../styles/UserDailyTasks.css';
 
 function Page2() {
   return (

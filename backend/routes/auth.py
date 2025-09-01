@@ -2,7 +2,10 @@
 from flask import Blueprint, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.user import User
-from config import Config
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -23,7 +26,8 @@ def signup():
         return jsonify({"message": "User already exists"}), 400
 
     # Determine role
-    role = 'admin' if token == Config.ADMIN_TOKEN else 'user'
+    ADMIN_TOKEN = os.getenv("ADMIN_TOKEN")
+    role = 'admin' if token == ADMIN_TOKEN else 'user'
 
     # ✅ Hash the password with scrypt
     hashed_password = generate_password_hash(password)
