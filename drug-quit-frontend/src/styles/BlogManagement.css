@@ -1,0 +1,334 @@
+/* === Main Container === */
+.blog-management-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+/* === Page Header === */
+.blog-header {
+  text-align: center;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.blog-header h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+  background: linear-gradient(to right, #3b82f6, #1d4ed8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.blog-header p {
+  font-size: 1.15rem;
+  color: #64748b;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+  margin-bottom: 1.6rem;
+}
+
+/* === Grid Layout: Left (Preview + Form) | Right (Cards) === */
+.management-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.8rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* === Live Preview (Top Left) === */
+.preview-section h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.preview-card {
+  background: white;
+  border-radius: 20px;
+  padding: 1.8rem;
+  box-shadow: 0 8px 28px -10px rgba(0, 0, 0, 0.14);
+  border: 1px solid #e2e8f0;
+  transition: none;
+}
+
+.preview-card h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+
+.preview-card .blog-excerpt {
+  font-size: 1.05rem;
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+}
+
+.preview-card .blog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  font-size: 0.9rem;
+  color: #64748b;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 1rem;
+}
+
+/* === Add/Edit Form (Bottom Left) === */
+.form-section h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.blog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.blog-form input,
+.blog-form textarea {
+  padding: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.blog-form input:focus,
+.blog-form textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.blog-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 70px;
+  text-align: center;
+}
+
+.btn-primary {
+  align-self: flex-start;
+  padding: 10px 20px;
+  background: #3b82f6;
+  color: white;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  align-self: flex-start;
+  padding: 8px 16px;
+  background: #6b7280;
+  color: white;
+  border-radius: 12px;
+  font-size: 0.95rem;
+}
+
+.btn-secondary:hover {
+  background: #4b5563;
+}
+
+/* === Blog Cards (Right Panel) === */
+.right-panel h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.blog-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.6rem;
+  width: 100%;
+}
+
+.blog-row .blog-card {
+  flex: 1;
+  min-width: 240px;
+  max-width: none;
+  background: white;
+  border-radius: 18px;
+  padding: 1.8rem;
+  box-shadow: 0 6px 20px -10px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  transition: all 0.4s cubic-bezier(0.3, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 28px -10px rgba(0, 0, 0, 0.14);
+}
+
+.blog-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.7rem;
+  line-height: 1.3;
+}
+
+.blog-excerpt {
+  font-size: 1rem;
+  color: #475569;
+  line-height: 1.65;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.blog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  font-size: 0.85rem;
+  color: #64748b;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 0.9rem;
+}
+
+.blog-meta .blog-author {
+  font-weight: 600;
+  color: #334155;
+}
+
+/* === Edit & Delete Buttons (Same Size, Green & Red) === */
+.card-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.btn-edit {
+  background: #10b981; /* Emerald Green */
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #0d9488;
+  transform: scale(1.05);
+}
+
+.btn-delete {
+  background: #ef4444; /* Red */
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+}
+
+/* Responsive: Stack on tablet */
+@media (max-width: 1024px) {
+  .management-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .left-panel,
+  .right-panel {
+    width: 100%;
+  }
+}
+
+/* Mobile: Adjust font and padding */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 1.5rem;
+  }
+
+  .blog-header h1 {
+    font-size: 2.1rem;
+  }
+
+  .blog-header p {
+    font-size: 1.05rem;
+  }
+
+  .blog-form input,
+  .blog-form textarea {
+    padding: 0.9rem;
+  }
+
+  .preview-card,
+  .blog-card {
+    padding: 1.5rem;
+  }
+}
+
+/* Small Height: Reduce gaps */
+@media (max-height: 800px) {
+  .blog-management-container {
+    gap: 1rem;
+  }
+
+  .management-grid-layout {
+    gap: 1.5rem;
+  }
+
+  .preview-card,
+  .blog-card {
+    padding: 1.4rem;
+  }
+}
