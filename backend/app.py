@@ -8,6 +8,7 @@ from routes.mood_routes import mood_bp
 from routes.suggest_task import suggest_bp
 from routes.submit_task import submit_bp
 from routes.profile import profile_bp
+from routes.sobriety import sobriety_bp
 
 def create_app():
     app = Flask(__name__)
@@ -20,6 +21,7 @@ def create_app():
     app.register_blueprint(suggest_bp, url_prefix='/')
     app.register_blueprint(submit_bp, url_prefix='/')
     app.register_blueprint(profile_bp, url_prefix='/')
+    app.register_blueprint(sobriety_bp, url_prefix='/')
 
     return app
 

@@ -1,13 +1,10 @@
 # utils/tasks.py
 import google.generativeai as genai
 import random
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
+from config import Config
 
 # Configure Google AI
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+GOOGLE_API_KEY = Config.GOOGLE_API_KEY
 if GOOGLE_API_KEY:
     genai.configure(api_key=GOOGLE_API_KEY)
 else:

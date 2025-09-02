@@ -25,9 +25,6 @@ function SidebarNav() {
         <Link to={`${basePath}/blogs`} className="sidebar-link" end>
           📰 Blogs
         </Link>
-        <Link to={`${basePath}/UserDailyTasks`} className="sidebar-link">
-          🎯 Users Daily Tasks
-        </Link>
         <Link to={`${basePath}/chat`} className="sidebar-link">
         💬 Chat
         </Link>
@@ -37,7 +34,7 @@ function SidebarNav() {
         <Link to={`${basePath}/tasks`} className="sidebar-link">
           ✅ Tasks
         </Link>
-        <Link to="/profile" className="sidebar-link">
+        <Link to={`${basePath}/profile`} className="sidebar-link">
           👤 Profile
         </Link>
       </nav>

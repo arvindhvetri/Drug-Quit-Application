@@ -37,11 +37,19 @@ EMOTION_TO_POLARITY = {
     "exhausted": -0.5,
     "unwell": -0.4,
     "angry": -0.9,
-    "surprised": 0.2  # context-dependent, but often positive
+    "surprised": 0.2  # context-dependent
 }
 
+# Regex for emojis
 def detect_emotion_from_emoji(text):
-    emojis = re.findall(r'[\U0001F600-\U0001F64F\U0001F300-\U0001F5FF\U0001F680-\U0001F6FF\U0001F1E0-\U0001F1FF\U00002700-\U000027BF]', text)
+    emojis = re.findall(
+        r'[\U0001F600-\U0001F64F'
+        r'\U0001F300-\U0001F5FF'
+        r'\U0001F680-\U0001F6FF'
+        r'\U0001F1E0-\U0001F1FF'
+        r'\U00002700-\U000027BF]',
+        text
+    )
     detected = [EMOJI_TO_EMOTION.get(emoji, None) for emoji in emojis]
     emotional = [e for e in detected if e and e not in ["neutral", "thoughtful", "confused"]]
 
@@ -49,6 +57,17 @@ def detect_emotion_from_emoji(text):
         from collections import Counter
         return Counter(emotional).most_common(1)[0][0]
     return None
+
+
+# --- Quick Patch: Negation Handler ---
+NEGATIVE_PATTERNS = [
+    r"\bnot\s+(good|okay|fine|happy|great|well)\b",
+    r"\bno\s+(joy|happiness|love)\b",
+    r"\bnever\s+(felt|feeling)\b"
+]
+
+def has_negation(text: str) -> bool:
+    return any(re.search(p, text.lower()) for p in NEGATIVE_PATTERNS)
 
 
 def analyze_sentiment(text):
@@ -77,7 +96,17 @@ def analyze_sentiment(text):
             "source": "emoji_override"
         }
 
-    # Step 2: Use AI model on text
+    # Step 2: Quick negation rule check
+    if has_negation(original_text):
+        return {
+            "polarity": -0.5,
+            "mood": "negative",
+            "emotion": "sad",
+            "confidence": 0.8,
+            "source": "rule_negation"
+        }
+
+    # Step 3: Use AI model on text
     try:
         result = classifier(original_text)[0]
         label = result['label']

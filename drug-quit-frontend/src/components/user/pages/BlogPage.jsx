@@ -1,25 +1,23 @@
 // src/components/user/pages/BlogPage.jsx
 import React, { useState, useEffect } from 'react';
-import '@styles/BlogPage.css';
+import '../../../styles/BlogPage.css';
 import SidebarLayout from '../../layout/SidebarLayout';
 
 function BlogPage() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
-  // Fetch blogs from backend
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await fetch('/api/user/blogs'); // Your Flask route
-        if (!res.ok) throw new Error('Failed to fetch blogs');
+        const res = await fetch('http://localhost:5000/user/blogs');
+        if (!res.ok) throw new Error('Failed to load blogs');
         const data = await res.json();
-        // Only show first 5
-        setBlogs(data.slice(0, 5));
+        setBlogs(data);
       } catch (err) {
-        console.error('Fetch error:', err);
-        setError('Could not load stories. Please try again later.');
+        console.error(err);
+        setError(err.message);
       } finally {
         setLoading(false);
       }
@@ -28,14 +26,11 @@ function BlogPage() {
     fetchBlogs();
   }, []);
 
-  const topRow = blogs.slice(0, 3);
-  const bottomRow = blogs.slice(3, 5);
-
   if (loading) {
     return (
       <SidebarLayout>
-        <div className="blog-page-container">
-          <div className="loading">Loading stories...</div>
+        <div className="blog-container">
+          <p>Loading recovery stories...</p>
         </div>
       </SidebarLayout>
     );
@@ -44,8 +39,8 @@ function BlogPage() {
   if (error) {
     return (
       <SidebarLayout>
-        <div className="blog-page-container">
-          <div className="error">{error}</div>
+        <div className="blog-container">
+          <div className="alert alert-error">❌ Failed to load blogs. Please try again later.</div>
         </div>
       </SidebarLayout>
     );
@@ -53,55 +48,30 @@ function BlogPage() {
 
   return (
     <SidebarLayout>
-      <div className="blog-page-container">
-        {/* === Page Title Section === */}
+      <div className="blog-container">
         <header className="blog-header">
-          <h1>Stories of Strength</h1>
-          <p>Real journeys from people who’ve walked the path — one day at a time.</p>
+          <h1>📚 Recovery Stories & Insights</h1>
+          <p>Real journeys. Real hope. You're not alone.</p>
         </header>
 
-        {/* === Top Row: 3 Cards === */}
-        <div className="blog-row top">
-          {topRow.map((blog) => (
-            <div key={blog._id} className="blog-card">
-              <h3>{blog.title}</h3>
-              <p className="blog-excerpt">{blog.excerpt}</p>
-              <div className="blog-meta">
-                <span className="blog-author">By {blog.author}</span>
-                <span className="blog-date">{blog.date}</span>
-                <span className="blog-readtime">{blog.readTime}</span>
-              </div>
-              {blog.link && (
-                <div className="blog-link">
-                  <a href={blog.link} target="_blank" rel="noopener noreferrer">
-                    🔗 Resource
-                  </a>
+        <div className="blogs-grid">
+          {blogs.length === 0 ? (
+            <p className="no-blogs">No stories yet. Check back soon!</p>
+          ) : (
+            blogs.map((blog) => (
+              <article key={blog._id} className="blog-card">
+                <h3>{blog.title}</h3>
+                <p className="blog-excerpt">{blog.excerpt}</p>
+                <div className="blog-meta">
+                  <span>By {blog.author}</span>
+                  <span>•</span>
+                  <span>{blog.date}</span>
+                  <span>•</span>
+                  <span>{blog.readTime}</span>
                 </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* === Bottom Row: 2 Cards === */}
-        <div className="blog-row bottom">
-          {bottomRow.map((blog) => (
-            <div key={blog._id} className="blog-card">
-              <h3>{blog.title}</h3>
-              <p className="blog-excerpt">{blog.excerpt}</p>
-              <div className="blog-meta">
-                <span className="blog-author">By {blog.author}</span>
-                <span className="blog-date">{blog.date}</span>
-                <span className="blog-readtime">{blog.readTime}</span>
-              </div>
-              {blog.link && (
-                <div className="blog-link">
-                  <a href={blog.link} target="_blank" rel="noopener noreferrer">
-                    🔗 Resource
-                  </a>
-                </div>
-              )}
-            </div>
-          ))}
+              </article>
+            ))
+          )}
         </div>
       </div>
     </SidebarLayout>

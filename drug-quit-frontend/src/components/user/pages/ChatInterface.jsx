@@ -13,9 +13,8 @@ function ChatInterface() {
   const fetchHistory = async () => {
     const user_id = localStorage.getItem('user_id');
     if (!user_id) return;
-
     try {
-      const res = await fetch(`/api/profile/${user_id}`);
+      const res = await fetch(`http://localhost:5000/api/profile/${user_id}`);
       if (res.ok) {
         const data = await res.json();
         const chatHistory = data.chat_history || [];
@@ -34,7 +33,10 @@ function ChatInterface() {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-  useEffect(() => scrollToBottom(), [messages]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   // Handle send message
   const handleSubmit = async (e) => {
@@ -47,7 +49,7 @@ function ChatInterface() {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/chat', {
+      const res = await fetch('http://localhost:5000/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -3,14 +3,22 @@ from flask import Blueprint, request, jsonify
 from bson import ObjectId
 from models.blog import Blog
 from models.user import User
+from utils.blog_helper import generate_blog_from_source
 
 blogs_bp = Blueprint('blogs', __name__)
 
 # GET: All blogs for users (public)
 @blogs_bp.route('/user/blogs', methods=['GET'])
 def get_user_blogs():
-    blogs = Blog.get_all(limit=5)  # Max 5 for user view
-    return jsonify(blogs), 200
+    """
+    Fetch real recovery stories from web → Gemini-rewrite → return
+    """
+    try:
+        blogs = generate_blog_from_source()
+        return jsonify(blogs), 200
+    except Exception as e:
+        print(f"Error fetching blogs: {e}")
+        return jsonify([]), 200  # Return empty list on error
 
 # GET: All blogs for admin (full list)
 @blogs_bp.route('/admin/blogs', methods=['GET'])

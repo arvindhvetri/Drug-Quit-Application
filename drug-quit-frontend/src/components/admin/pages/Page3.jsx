@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../styles/Page3.css';
 
 function Page3() {
   return (

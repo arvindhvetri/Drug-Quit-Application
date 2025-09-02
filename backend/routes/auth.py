@@ -2,10 +2,7 @@
 from flask import Blueprint, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.user import User
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
+from config import Config
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -26,18 +23,18 @@ def signup():
         return jsonify({"message": "User already exists"}), 400
 
     # Determine role
-    ADMIN_TOKEN = os.getenv("ADMIN_TOKEN")
-    role = 'admin' if token == ADMIN_TOKEN else 'user'
+    role = 'admin' if token == Config.ADMIN_TOKEN else 'user'
 
     # ✅ Hash the password with scrypt
     hashed_password = generate_password_hash(password)
 
     # Save user
-    User.create_user(email, username, hashed_password, role)
+    user_id = User.create_user(email, username, hashed_password, role)
 
     return jsonify({
         "message": "User created successfully",
-        "role": role
+        "role": role,
+        "user_id": str(user_id)
     }), 201
 
 @auth_bp.route('/login', methods=['POST'])
@@ -53,7 +50,8 @@ def login():
         return jsonify({
             "message": "Login successful",
             "role": user['role'],
-            "username": user['username']  # ✅ Must include this
+            "username": user['username'],
+            "user_id": user['user_id']
         }), 200
 
     return jsonify({"message": "Invalid credentials"}), 401

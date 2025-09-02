@@ -1,12 +1,9 @@
 # utils/gemini_chatbot.py
 
 import google.generativeai as genai
-from dotenv import load_dotenv
-import os
+from config import Config
 
-load_dotenv()
-
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key=Config.GOOGLE_API_KEY)
 
 def get_chat_response(message: str, chat_history: list = None):
     """
