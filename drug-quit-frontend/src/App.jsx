@@ -10,6 +10,7 @@ import UserDailyTasks from "./components/user/pages/UserDailyTasks";
 import ChatInterface from "./components/user/pages/ChatInterface";
 import MoodInputPage from './components/user/pages/MoodInputPage';
 import TaskDashboard from "./components/user/pages/TaskDashboard";
+import UserProfilePage from './components/user/pages/UserProfilePage';
 
 import AdminPortal from "./components/admin/AdminPortal";
 import BlogManagement from "./components/admin/pages/BlogManagement";
@@ -35,6 +36,7 @@ function App() {
           <Route path="chat" element={<ChatInterface />} />
           <Route path="mood" element={<MoodInputPage />} />
           <Route path="tasks" element={<TaskDashboard />} />
+          <Route path="profile" element={<UserProfilePage />} />
         </Route>
 
         {/* Admin Portal */}
