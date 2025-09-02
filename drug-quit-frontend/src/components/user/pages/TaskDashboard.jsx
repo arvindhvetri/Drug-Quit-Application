@@ -8,14 +8,13 @@ function TaskDashboard() {
   const [photos, setPhotos] = useState({});
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
-
   const userId = localStorage.getItem('user_id');
 
   // Fetch all pending tasks
   const fetchTasks = async () => {
     if (!userId) return;
     try {
-      const res = await fetch(`/api/profile/${userId}`);
+      const res = await fetch(`http://localhost:5000/api/profile/${userId}`);
       const data = await res.json();
       const pendingTasks = (data.tasks || []).filter(t => t.status === 'pending');
       setTasks(pendingTasks);
@@ -45,14 +44,13 @@ function TaskDashboard() {
 
     setLoading(true);
     setMessage('');
-
     const formData = new FormData();
     formData.append('user_id', userId);
     formData.append('task_id', task.task_id);
     formData.append('photo', photo);
 
     try {
-      const res = await fetch('/api/submit-task', {
+      const res = await fetch('http://localhost:5000/api/submit-task', {
         method: 'POST',
         body: formData,
       });
@@ -82,10 +80,9 @@ function TaskDashboard() {
   // Suggest a new task
   const suggestNewTask = async () => {
     try {
-      const res = await fetch(`/api/suggest-task?user_id=${userId}`);
+      const res = await fetch(`http://localhost:5000/api/suggest-task?user_id=${userId}`);
       if (!res.ok) throw new Error('Failed to suggest task');
       const newTask = await res.json();
-
       setTasks(prev => [
         ...prev,
         {
