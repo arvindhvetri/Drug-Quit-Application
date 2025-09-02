@@ -3,8 +3,11 @@ from flask import Flask
 from flask_cors import CORS
 from routes.auth import auth_bp
 from routes.blogs import blogs_bp
-from routes.tasks import tasks_bp
 from routes.chat import chat_bp
+from routes.mood_routes import mood_bp
+from routes.suggest_task import suggest_bp
+from routes.submit_task import submit_bp
+from routes.profile import profile_bp
 
 def create_app():
     app = Flask(__name__)
@@ -12,8 +15,11 @@ def create_app():
 
     app.register_blueprint(auth_bp, url_prefix='/')
     app.register_blueprint(blogs_bp, url_prefix='/')
-    app.register_blueprint(tasks_bp, url_prefix='/')
     app.register_blueprint(chat_bp, url_prefix='/')
+    app.register_blueprint(mood_bp, url_prefix='/')
+    app.register_blueprint(suggest_bp, url_prefix='/')
+    app.register_blueprint(submit_bp, url_prefix='/')
+    app.register_blueprint(profile_bp, url_prefix='/')
 
     return app
 
