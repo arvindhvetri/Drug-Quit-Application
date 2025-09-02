@@ -21,10 +21,7 @@ function MoodInputPage() {
     setLoading(true);
     setError('');
     setResult(null);
-
     const formData = new FormData();
-    
-    // ✅ Use user_id from localStorage
     formData.append('user_id', localStorage.getItem('user_id'));
     formData.append('text', text);
     if (file) {
@@ -32,13 +29,12 @@ function MoodInputPage() {
     }
 
     try {
-      const res = await fetch('/api/analyze', {
+      const res = await fetch('http://localhost:5000/api/analyze', {
         method: 'POST',
         body: formData,
       });
 
       if (!res.ok) throw new Error('Failed to analyze input');
-
       const data = await res.json();
       setResult(data);
     } catch (err) {
@@ -87,7 +83,6 @@ function MoodInputPage() {
               disabled={loading}
             />
           </div>
-
           <div className="form-group">
             <label>🎙️ Upload Voice Note (MP3)</label>
             <input
@@ -98,7 +93,6 @@ function MoodInputPage() {
             />
             {file && <p className="file-selected">✅ Selected: {file.name}</p>}
           </div>
-
           <button type="submit" disabled={loading} className="btn btn-primary">
             {loading ? 'Analyzing...' : 'Submit & Get Analysis'}
           </button>
